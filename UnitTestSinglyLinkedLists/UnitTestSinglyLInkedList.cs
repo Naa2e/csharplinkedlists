@@ -88,7 +88,7 @@ namespace UnitTestSinglyLinkedLists
             list.AddLast("grille");
             list.ElementAt(-2);
         }
-        
+
         [TestMethod]
         public void LastOnEmptyList()
         {
@@ -322,7 +322,7 @@ namespace UnitTestSinglyLinkedLists
             list.AddLast("foo");
             Assert.AreEqual(1, list.Count());
         }
-        
+
         [TestMethod]
         public void CountNItemList()
         {
@@ -352,7 +352,7 @@ namespace UnitTestSinglyLinkedLists
             SinglyLinkedList list = new SinglyLinkedList("foo", "bar", "grille");
             Assert.AreEqual(0, list.IndexOf("foo"));
         }
-        
+
         [TestMethod]
         public void IndexOfNodeInMiddlePosition()
         {

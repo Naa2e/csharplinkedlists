@@ -18,7 +18,7 @@ namespace SinglyLinkedLists
             get { return next; }
             set
             {
-                if (value == this)
+                if (this == value || value == null)
                 {
                     throw new ArgumentException();
                 }
@@ -43,7 +43,6 @@ namespace SinglyLinkedLists
             // This implementation is provided for your convenience.
             return node1.CompareTo(node2) > 0;
         }
-
         public SinglyLinkedListNode(string value)
         {
             this.value = value;
@@ -55,17 +54,24 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
         public int CompareTo(Object obj)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode otherNode = obj as SinglyLinkedListNode;
+            return otherNode == null ? 1 : this.value.CompareTo(otherNode.Value);
         }
 
         public bool IsLast()
         {
-            return (this.next == null);
+            //  Object thing = null;
+            return this.next == null;
         }
 
         public override string ToString()
         {
             return this.value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.CompareTo(obj) == 0;
         }
     }
 }

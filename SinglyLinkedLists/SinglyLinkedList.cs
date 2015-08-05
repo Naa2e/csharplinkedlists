@@ -7,6 +7,7 @@ namespace SinglyLinkedLists
 {
     public class SinglyLinkedList
     {
+        private SinglyLinkedList;
         public SinglyLinkedList()
         {
             // NOTE: This constructor isn't necessary, once you've implemented the constructor below.
@@ -48,11 +49,19 @@ namespace SinglyLinkedLists
 
         public string ElementAt(int index)
         {
-            throw new NotImplementedException();
+            if (this.First() == null)
         }
 
         public string First()
         {
+            if (this.first_node == null)
+            {
+                return null;
+            }
+            else
+            {
+                return this.first_node.Value;
+            }
             throw new NotImplementedException();
         }
 

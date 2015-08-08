@@ -169,23 +169,31 @@ namespace SinglyLinkedLists
         {
             throw new NotImplementedException();
         }
+
         public override string ToString()
         {
-            string str = "{ ";
-            for (int i = 0; i < this.Count(); i++)  
+            var opening = "{";
+            var ending = "}";
+            var space = " ";
+            var output = "";
+            var quote = "\"";
+            var comma = "," + space;
+            output += opening;
+            var node = this.first_node;
+            if (this.Count() >= 1)
             {
-                str += "\"" + this.ElementAt(i) + "\"";  
-                if (i < this.Count()-1)
+                output += space;
+                while (!node.IsLast())
                 {
-                    str += ", ";
+                    output += quote + node.Value + quote + comma;
+                    node = node.Next;
                 }
-                else
-                {
-                    str += " ";
-                }
-           }
-            return str + "}";
-                
-                }
+                output += quote + this.Last() + quote;
+            }
+            output += space;
+            output += ending;
+            return output;
+        }
+
     }
 }

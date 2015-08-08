@@ -7,7 +7,7 @@ namespace SinglyLinkedLists
 {
     public class SinglyLinkedList
     {
-        private SinglyLinkedList;
+        private SinglyLinkedListNode first_node;
         public SinglyLinkedList()
         {
             // NOTE: This constructor isn't necessary, once you've implemented the constructor below.
@@ -38,18 +38,69 @@ namespace SinglyLinkedLists
 
         public void AddLast(string value)
         {
-            throw new NotImplementedException();
+            if (this.First() == null)
+            {
+                first_node = new SinglyLinkedListNode(value);
+            }
+            else
+            {
+                var node = this.first_node;
+                while (!node.IsLast()) // What's another way to do this????
+                {
+                    node = node.Next;
+                }
+                node.Next = new SinglyLinkedListNode(value);
+            }
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
         public int Count()
         {
-            throw new NotImplementedException();
+            // If the list is empty
+            // this.Count() == 0
+            if (this.First() == null)
+            {
+                return 0;
+            }
+            else
+            {
+                int length = 1;
+                var node = this.first_node;
+                // Complexity is O(n)
+                while (node.Next != null)
+                {
+                    length++;
+                    node = node.Next;
+                }
+                return length;
+            }
+
+
+            // Provide a second implementation
         }
 
         public string ElementAt(int index)
         {
             if (this.First() == null)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+
+                var node = this.first_node;
+
+                for (var i = 0; i <= index; i++)
+                {
+                    if (i == index)
+                    {
+                        break;
+                    }
+                    node = node.Next;
+                }
+                return node.Value;
+
+            }
         }
 
         public string First()
@@ -62,7 +113,9 @@ namespace SinglyLinkedLists
             {
                 return this.first_node.Value;
             }
-            throw new NotImplementedException();
+
+            // return this.first_node ? null : this.first_node.Value;
+
         }
 
         public int IndexOf(string value)
@@ -80,7 +133,26 @@ namespace SinglyLinkedLists
         // HINT 3: If you highlight code and right click, you can use the refactor menu to extract a method for you...
         public string Last()
         {
-            throw new NotImplementedException();
+            var node = this.first_node;
+            if (node == null)
+            {
+                return null;
+            }
+            else
+            {
+                // Step 1: Do I need to loop??????
+                // Step 2: IF yes, Do I already have an example of how??? ***
+                // Step 3: How can I modify the previous examples?
+                // Step 4: Write what I think works.
+                // Step 5: Rebuild/Re-run tests
+                // Step 6: Rinse and repeat
+                while (!node.IsLast())
+                {
+                    node = node.Next;
+                }
+                return node.Value;
+
+            }
         }
 
         public void Remove(string value)
@@ -97,5 +169,23 @@ namespace SinglyLinkedLists
         {
             throw new NotImplementedException();
         }
+        public override string ToString()
+        {
+            string str = "{ ";
+            for (int i = 0; i < this.Count(); i++)  
+            {
+                str += "\"" + this.ElementAt(i) + "\"";  
+                if (i < this.Count()-1)
+                {
+                    str += ", ";
+                }
+                else
+                {
+                    str += " ";
+                }
+           }
+            return str + "}";
+                
+                }
     }
 }

@@ -9,7 +9,7 @@ namespace SinglyLinkedLists
     {
         private SinglyLinkedListNode first_node;
         public SinglyLinkedList()
-        {
+        { 
             // NOTE: This constructor isn't necessary, once you've implemented the constructor below.
         }
 
@@ -30,10 +30,18 @@ namespace SinglyLinkedLists
         {
             throw new NotImplementedException();
         }
-
+   
         public void AddFirst(string value)
         {
-            throw new NotImplementedException();
+            if (this.First() == null)
+            { first_node = new SinglyLinkedListNode(value); }
+            else
+            {
+                var newNode = new SinglyLinkedListNode(value); //this is how you make a new node
+                var theoldNode = this.first_node; //this creates a variable for first nodes
+                newNode.Next = theoldNode; // this points the newest node at the original first node
+                this.first_node = newNode; // this saves the newest node to the singly linked list, refresh 
+            }
         }
 
         public void AddLast(string value)
@@ -167,8 +175,20 @@ namespace SinglyLinkedLists
 
         public string[] ToArray()
         {
-            throw new NotImplementedException();
+            var node = this.first_node; //first node will be null on an empty list
+            var mylist = new List<string>();
+            if (node == null) return mylist.ToArray();
+            while (!node.IsLast()) //code will break here because null is not an object
+            {
+                mylist.Add(node.Value); 
+                node = node.Next;
+            }
+            
+            mylist.Add(node.Value);
+            return mylist.ToArray();
+
         }
+    
 
         public override string ToString()
         {

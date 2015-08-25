@@ -5,30 +5,92 @@ using System.Text;
 
 namespace SinglyLinkedLists
 {
-    public class SinglyLinkedList
+    public class SinglyLinkedList  
     {
         private SinglyLinkedListNode first_node;
-        public SinglyLinkedList()
+        public SinglyLinkedList() //you can tell its a constructor because the name of that method is the name of the name of the class itself 
         { 
             // NOTE: This constructor isn't necessary, once you've implemented the constructor below.
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/aa691335(v=vs.71).aspx
-        public SinglyLinkedList(params object[] values)
+        public SinglyLinkedList(params object[] values)//this is what is being passed in is the parameteres of an array
         {
-            throw new NotImplementedException();
+            if (values.Count() == 0)
+            {
+                throw new ArgumentException();
+            }
+            
+            for (var i=0; i < values.Count(); i++)
+
+            {//being passed as an array of objects so needs to be converted to a string
+                this.AddLast(values[i].ToString());
+            }
+                  
+          
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/6x16t2tx.aspx
-        public string this[int i]
+        public string this[int i]// list [i] = value; i is new list q is old list
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return this.ElementAt(i); }
+            set {
+                var placeHolderList = new SinglyLinkedList();
+
+                for (var q = 0; q < this.Count(); q++)
+                {
+                   if (q==i)
+                    {
+                        placeHolderList.AddLast(value);
+                    }
+                    else
+                    {
+                        placeHolderList.AddLast(this.ElementAt(q));
+                    }
+                }
+
+                first_node = new SinglyLinkedListNode(placeHolderList.First());
+                for (var w = 1; w < placeHolderList.Count(); w++)
+                {
+                    this.AddLast(placeHolderList.ElementAt(w));
+                }
+            }
         }
 
         public void AddAfter(string existingValue, string value)
         {
-            throw new NotImplementedException();
+            int testForValue = -1;
+
+            for (var i = 0; i < this.Count(); i++)
+            {
+                if (this.ElementAt(i) == existingValue)
+                {
+                    testForValue = i;
+                    break;
+                }
+              
+            }
+            if (testForValue == -1)
+            {
+                throw new ArgumentException();
+            }//one = equalss setting value, two == equals tests for equality
+            var placeHolderList = new SinglyLinkedList();
+
+            for (var q = 0; q < this.Count(); q++)
+            {
+                placeHolderList.AddLast(this.ElementAt(q));
+
+                if (q ==testForValue)
+                {
+                    placeHolderList.AddLast(value);
+                }
+            }
+
+            first_node = new SinglyLinkedListNode(placeHolderList.First());
+            for (var w = 1; w <placeHolderList.Count(); w++)
+            {
+                this.AddLast(placeHolderList.ElementAt(w));
+            }
         }
    
         public void AddFirst(string value)

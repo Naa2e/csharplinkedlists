@@ -15,8 +15,16 @@ namespace SinglyLinkedLists
         private SinglyLinkedListNode next;
         public SinglyLinkedListNode Next
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return this.next; }
+            set { if (this == value)
+                {   //if I am pointing at myself then throw an exception
+                    throw new ArgumentException();
+                }
+                else
+                {   //if I am pointing at someone else then its cool
+                    this.next = value;
+                }
+            }
         }
 
         private string value; // same as this.value
